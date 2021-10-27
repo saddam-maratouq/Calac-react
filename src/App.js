@@ -1,25 +1,80 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react' 
+import Numbers from './component/Numbers';
+import Outbut from './component/Outbut'; 
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+export class App extends Component { 
+
+ constructor() {
+   super()
+ 
+   this.state = {
+      
+    total : ''
+   }
+
+ } 
+
+/////////////////////////////////////
+ 
+
+ SelctedNum = (butoon) => {
+    if (butoon ==='=') {
+      this.calc()
+    }
+
+
+    else if (butoon === 'Ac') {
+      this.reset() 
+    }
+    
+   else {
+
+     this.setState({
+       total : this.state.total + butoon 
+     })
+   }
+
+ }
+
+//////////////////////////////////// 
+
+
+reset = () => {
+
+  this.setState({
+    total : ''
+  })
+}
+
+calc = () => {
+  this.setState({
+    total : eval(this.state.total) 
+  })
+  console.log(this.state.total);
+}
+
+
+
+
+
+ 
+  render() {
+    return (
+     
+     <div>
+      <h1> Small calcloation  </h1> 
+
+      <Outbut  result ={this.state.total} />
+      
+     <Numbers  SelctedNum={this.SelctedNum} />  
+               
+     
     </div>
-  );
+     
+    )
+  }
 }
 
 export default App;
